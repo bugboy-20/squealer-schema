@@ -16,8 +16,8 @@ export const userReadSchema = z.object({
   type: typeEnum,
   SMM: userString.nullable(),
   verified: z.boolean(),
-  quote_modifier: z.number(),
-  quote: quotaSchema,
+  quota_modifier: z.number(),
+  quota: quotaSchema,
 });
 
 export type userRead_t = z.infer<typeof userReadSchema>;

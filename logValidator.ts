@@ -5,3 +5,5 @@ export const logSchema = z.object({
   method: z.enum(['GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']),
   message: z.string(),
 });
+
+export type log_t = z.infer<typeof logSchema>;

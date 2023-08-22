@@ -28,4 +28,4 @@ export const quotaSchema = z
       'La quota mensile deve essere meno di 4 volte la quota settimanale',
   });
 
-export type quote_t = z.infer<typeof quotaSchema>;
+export type quota_t = z.infer<typeof quotaSchema>;
