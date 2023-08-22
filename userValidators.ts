@@ -1,34 +1,35 @@
-import { z } from "zod";
+import { z } from 'zod';
+import {
+  standardString,
+  userString,
+  emailString,
+  typeEnum,
+  passwString,
+} from './utils/global';
+import { quotaSchema } from './quotaValidator';
 
-const quotaSchema = z.object({
-  actualD: z.number().positive().int(),
-  actualW: z.number().positive().int(),
-  actualM: z.number().positive().int(),
-  maxD: z.number().positive().int(),
-  maxW: z.number().positive().int(),
-  maxM: z.number().positive().int(),
-});
-
-const userReadSchema = z.object({
-  username: z.string(),
-  email: z.string().email(),
-  firstname: z.string(),
-  lastname: z.string(),
-  type: z.enum(["standard", "professional", "moderator"]),
-  SMM: z.string().nullable(),
+export const userReadSchema = z.object({
+  username: userString,
+  email: emailString,
+  firstname: standardString,
+  lastname: standardString,
+  type: typeEnum,
+  SMM: userString.nullable(),
   verified: z.boolean(),
   quote_modifier: z.number(),
   quote: quotaSchema,
 });
 
-const userWriteSchema = z.object({
-  username: z.string(),
-  email: z.string().email(),
-  firstname: z.string(),
-  lastname: z.string(),
-  password: z.string(),
-  type: z.enum(["standard", "professional", "moderator"]),
-  SMM: z.string().nullable(),
+export type userRead_t = z.infer<typeof userReadSchema>;
+
+export const userWriteSchema = z.object({
+  username: standardString,
+  email: emailString,
+  firstname: standardString,
+  lastname: standardString,
+  password: passwString,
+  type: typeEnum,
+  SMM: userString.nullable(),
 });
 
-export { quotaSchema, userReadSchema, userWriteSchema }
+export type userWrite_t = z.infer<typeof userWriteSchema>;

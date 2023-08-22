@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { positiveInteger } from './utils/global';
 
-export const quoteSchema = z
+export const quotaSchema = z
   .object({
     actualD: positiveInteger,
     actualW: positiveInteger,
@@ -28,4 +28,4 @@ export const quoteSchema = z
       'La quota mensile deve essere meno di 4 volte la quota settimanale',
   });
 
-export type quote_t = z.infer<typeof quoteSchema>;
+export type quote_t = z.infer<typeof quotaSchema>;
