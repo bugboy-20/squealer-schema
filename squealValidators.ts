@@ -28,14 +28,13 @@ export const squealWriteSchema = z.object({
 
 export type squealWrite_t = z.infer<typeof squealWriteSchema>;
 
-export const squealReadSchema = z
-  .object({
-    _id: z.string(), // TODO: https://stackoverflow.com/questions/76284139/how-to-use-a-zod-field-has-different-validation-based-on-conditions
-    datetime: z.coerce.date(),
-    impressions: positiveInteger,
-    positive_reaction: positiveInteger,
-    negative_reaction: positiveInteger,
-  })
-  .merge(squealWriteSchema);
+export const squealReadSchema = z.object({
+  _id: z.string(), // TODO: https://stackoverflow.com/questions/76284139/how-to-use-a-zod-field-has-different-validation-based-on-conditions
+  ...squealWriteSchema.shape,
+  datetime: z.coerce.date(),
+  impressions: positiveInteger,
+  positive_reaction: positiveInteger,
+  negative_reaction: positiveInteger,
+});
 
 export type squealRead_t = z.infer<typeof squealReadSchema>;
