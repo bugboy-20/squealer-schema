@@ -13,21 +13,29 @@ const receiversArray = z
 export const squealWriteSchema = z.object({
   receivers: receiversArray,
   author: userString,
-  body: z.string().regex(/^(txt|img|vid|geo):.*/,{ message: 'Specifica il tipo di bodyche vuoi assengnare'}),  
+  body: z.discriminatedUnion('type', [
+    z.object({
+      type: z.literal('text'),
+      content: z.string().min(1),
+    }),
+    z.object({
+      type: z.literal('media'),
+      content: z.string().url(),
+    }),
+  ]),
   category: z.array(z.string()),
 });
 
 export type squealWrite_t = z.infer<typeof squealWriteSchema>;
 
-export const squealReadSchema = z.object({
-  _id: z.string(), // TODO: https://stackoverflow.com/questions/76284139/how-to-use-a-zod-field-has-different-validation-based-on-conditions
-  ...squealWriteSchema.shape,
-  datetime: z.coerce.date(),
-  impressions: positiveInteger,
-  positive_reaction: positiveInteger,
-  negative_reaction: positiveInteger,
-  });
+export const squealReadSchema = z
+  .object({
+    _id: z.string(), // TODO: https://stackoverflow.com/questions/76284139/how-to-use-a-zod-field-has-different-validation-based-on-conditions
+    datetime: z.coerce.date(),
+    impressions: positiveInteger,
+    positive_reaction: positiveInteger,
+    negative_reaction: positiveInteger,
+  })
+  .merge(squealWriteSchema);
 
 export type squealRead_t = z.infer<typeof squealReadSchema>;
-
-
