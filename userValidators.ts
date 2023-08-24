@@ -16,7 +16,6 @@ export const userReadSchema = z.object({
   type: typeEnum,
   SMM: userString.nullable(),
   verified: z.boolean(),
-  quota_modifier: z.number(),
   quota: quotaSchema,
 });
 
