@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { passwString, standardString } from './utils/global';
+import { passwString, userString } from './utils/global';
 
 export const loginSchema = z.object({
-  username: standardString.transform((val) => `@${val}`),
+  username: userString,
   password: passwString,
 });
 
