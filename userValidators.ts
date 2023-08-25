@@ -28,7 +28,6 @@ export const userWriteSchema = z.object({
   lastname: standardString,
   password: passwString,
   type: typeEnum,
-  SMM: userString.nullable(),
 });
 
 export type userWrite_t = z.infer<typeof userWriteSchema>;
