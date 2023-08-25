@@ -22,7 +22,7 @@ export const userReadSchema = z.object({
 export type userRead_t = z.infer<typeof userReadSchema>;
 
 export const userWriteSchema = z.object({
-  username: standardString,
+  username: userString,
   email: emailString,
   firstname: standardString,
   lastname: standardString,

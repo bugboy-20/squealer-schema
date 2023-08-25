@@ -16,7 +16,7 @@ export const userString = z.custom<`@${string}`>(
   (val) => /@(.+)/.test(val as string),
   {
     message: "Un utente deve iniziare con '@'",
-  }
+  },
 );
 
 export const channelString = z.custom<`§${string}` | `#${string}`>(
@@ -24,7 +24,7 @@ export const channelString = z.custom<`§${string}` | `#${string}`>(
   {
     message:
       "Il canale deve iniziare con '#' o '§' e deve esssere tutto minuscolo o tutto maiuscolo",
-  }
+  },
 );
 
 export const receiverString = z.union([userString, channelString]);
