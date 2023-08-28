@@ -10,19 +10,20 @@ const receiversArray = z
     message: 'Non puoi inserire destinatari duplicati',
   });
 
+export const textBody = z.object({
+  type: z.literal('text'),
+  content: z.string().min(1),
+});
+
+export const mediaBody = z.object({
+  type: z.literal('media'),
+  content: z.string().url({ message: 'Devi inserire un URL valido' }),
+});
+
 export const squealWriteSchema = z.object({
   receivers: receiversArray,
   author: userString,
-  body: z.discriminatedUnion('type', [
-    z.object({
-      type: z.literal('text'),
-      content: z.string().min(1),
-    }),
-    z.object({
-      type: z.literal('media'),
-      content: z.string().url(),
-    }),
-  ]),
+  body: z.discriminatedUnion('type', [textBody, mediaBody]),
   category: z.array(z.string()),
 });
 

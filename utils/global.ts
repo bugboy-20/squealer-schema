@@ -27,7 +27,13 @@ export const channelString = z.custom<`§${string}` | `#${string}`>(
   },
 );
 
-export const receiverString = z.union([userString, channelString]);
+export const receiverString = z.union([userString, channelString], {
+  errorMap: (issue, ctx) => {
+    if (issue.code === 'invalid_union')
+      return { message: 'Un destinatario deve iniziare con @, # o §' };
+    return { message: ctx.defaultError };
+  },
+});
 
 export const standardString = z
   .string()
