@@ -27,6 +27,10 @@ export const channelString = z.custom<`§${string}` | `#${string}`>(
   },
 );
 
+export const officialChannelString = z.custom<`§${string}`>(
+  (val) => /^§[A-Z]+.+$/.test(val as string)
+);
+
 export const receiverString = z.union([userString, channelString], {
   errorMap: (issue, ctx) => {
     if (issue.code === 'invalid_union')
