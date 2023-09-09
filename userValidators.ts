@@ -10,6 +10,7 @@ import { quotaSchema } from './quotaValidator';
 
 export const userReadSchema = z.object({
   username: userString,
+  propic: z.string().url(),
   email: emailString,
   firstname: standardString,
   lastname: standardString,
@@ -23,6 +24,7 @@ export type userRead_t = z.infer<typeof userReadSchema>;
 
 export const userWriteSchema = z.object({
   username: userString,
+  propic: z.string().url().nullable(),
   email: emailString,
   firstname: standardString,
   lastname: standardString,
