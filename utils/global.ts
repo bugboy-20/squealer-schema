@@ -27,8 +27,8 @@ export const channelString = z.custom<`§${string}` | `#${string}`>(
   },
 );
 
-export const officialChannelString = z.custom<`§${string}`>(
-  (val) => /^§[A-Z]+.+$/.test(val as string)
+export const officialChannelString = z.custom<`§${string}`>((val) =>
+  /^§[A-Z]+.+$/.test(val as string),
 );
 
 export const receiverString = z.union([userString, channelString], {
@@ -51,3 +51,4 @@ export const emailString = z
 export const positiveInteger = z.number().int().min(0);
 
 export const typeEnum = z.enum(['standard', 'professional', 'moderator']);
+export type userType_t = z.infer<typeof typeEnum>;
