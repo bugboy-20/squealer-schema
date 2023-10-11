@@ -5,6 +5,7 @@ import {
   emailString,
   typeEnum,
   passwString,
+  receiverString,
 } from './utils/global';
 import { quotaSchema } from './quotaValidator';
 
@@ -18,6 +19,7 @@ export const userReadSchema = z.object({
   SMM: userString.nullable(),
   verified: z.boolean(),
   quota: quotaSchema,
+  subscriptions: z.array(receiverString)
 });
 
 export type userRead_t = z.infer<typeof userReadSchema>;

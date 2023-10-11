@@ -9,7 +9,7 @@ export const channelSchema = z.object({
       'public: tutti possono iscriversi, private: solo gli invitati possono iscriversi',
     invalid_type_error: 'Il tipo deve essere public o private',
   }),
-  subscribed: z.array(userString),
+  subscribed: z.boolean().optional()
 });
 
 export type channel_t = z.infer<typeof channelSchema>;
