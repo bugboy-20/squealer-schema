@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { receiverString, userString, positiveInteger } from './utils/global';
+import { featureCollectionSchema } from './utils/geojson';
 
 const receiversArray = z
   .array(receiverString)
@@ -20,10 +21,15 @@ export const mediaBody = z.object({
   content: z.string().url({ message: 'Devi inserire un URL valido' }),
 });
 
+export const geoBody = z.object({
+  type: z.literal('geo'),
+  content: featureCollectionSchema,
+});
+
 export const squealWriteSchema = z.object({
   receivers: receiversArray,
   author: userString,
-  body: z.discriminatedUnion('type', [textBody, mediaBody]),
+  body: z.discriminatedUnion('type', [textBody, mediaBody, geoBody]),
   category: z.array(z.string()),
 });
 
