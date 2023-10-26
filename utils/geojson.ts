@@ -51,7 +51,10 @@ export const featureSchema = z.object({
   type: z.literal('Feature'),
   geometry: geometrySchema,
   id: z.union([z.string(), z.number(), z.undefined()]).optional(),
-  properties: z.record(z.any()).nullable(),
+  properties: z
+    .record(z.any())
+    .and(z.object({ popup: z.string() }))
+    .nullable(),
 }) satisfies z.ZodType<GeoJSON.Feature>;
 
 // export const featureCollectionSchema = geoJsonObjectSchema.extend({
