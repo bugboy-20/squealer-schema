@@ -4,9 +4,12 @@ import { z } from 'zod';
 // https://datatracker.ietf.org/doc/html/rfc7946
 
 const positionSchema = z
-  .array(z.number())
-  .min(2)
-  .max(3) satisfies z.ZodType<GeoJSON.Position>;
+  .tuple([z.number(), z.number()])
+  .or(
+    z.tuple([z.number(), z.number(), z.number()]),
+  ) satisfies z.ZodType<GeoJSON.Position>;
+
+export type position_t = z.infer<typeof positionSchema>;
 
 export const pointSchema = z.object({
   type: z.literal('Point'),
@@ -65,4 +68,8 @@ export const featureSchema = z.object({
 export const featureCollectionSchema = z.object({
   type: z.literal('FeatureCollection'),
   features: z.array(featureSchema),
+  center: positionSchema,
+  zoom: z.number().optional(),
 }) satisfies z.ZodType<GeoJSON.FeatureCollection>;
+
+export type featureCollection_t = z.infer<typeof featureCollectionSchema>;
