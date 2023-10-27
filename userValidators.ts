@@ -26,7 +26,7 @@ export type userRead_t = z.infer<typeof userReadSchema>;
 
 export const userWriteSchema = z.object({
   username: userString,
-  propic: z.string().url().nullable(),
+  propic: z.string().url().optional(),
   email: emailString,
   firstname: standardString,
   lastname: standardString,
