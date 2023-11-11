@@ -19,7 +19,7 @@ export const userReadSchema = z.object({
   SMM: userString.nullable(),
   verified: z.boolean(),
   quota: quotaSchema,
-  subscriptions: z.array(receiverString)
+  subscriptions: z.array(receiverString),
 });
 
 export type userRead_t = z.infer<typeof userReadSchema>;

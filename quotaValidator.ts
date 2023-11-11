@@ -17,7 +17,7 @@ export const quotaSchema = z
       data.actualM <= data.maxM,
     {
       message: 'La quota attuale non può essere maggiore della quota massima',
-    }
+    },
   )
   .refine((data) => data.maxW < 7 * data.maxD, {
     message:
