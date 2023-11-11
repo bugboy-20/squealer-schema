@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { channelString, userString } from './utils/global';
+import { channelString } from './utils/global';
 
 export const channelSchema = z.object({
   name: channelString,
@@ -9,7 +9,7 @@ export const channelSchema = z.object({
       'public: tutti possono iscriversi, private: solo gli invitati possono iscriversi',
     invalid_type_error: 'Il tipo deve essere public o private',
   }),
-  subscribed: z.boolean().optional()
+  subscribed: z.boolean().optional(),
 });
 
 export type channel_t = z.infer<typeof channelSchema>;
