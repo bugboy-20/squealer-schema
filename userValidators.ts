@@ -19,6 +19,7 @@ export const userReadSchema = z.object({
   SMM: userString.nullable(),
   verified: z.boolean(),
   quota: quotaSchema,
+  blocked: z.boolean(),
   subscriptions: z.array(receiverString),
 });
 
