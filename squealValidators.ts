@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { receiverString, userString, positiveInteger } from './utils/global';
-import { featureCollectionSchema } from './utils/geojson';
+import { commentReadSchema } from './commentValidators';
+import { positiveInteger, receiverString, userString } from './utils/global';
+import { geoBody, mediaBody, textBody } from './utils/squealBody';
 
 const receiversArray = z
   .array(receiverString)
@@ -10,21 +11,6 @@ const receiversArray = z
   .refine((items) => new Set(items).size === items.length, {
     message: 'Non puoi inserire destinatari duplicati',
   });
-
-export const textBody = z.object({
-  type: z.literal('text'),
-  content: z.string().min(1),
-});
-
-export const mediaBody = z.object({
-  type: z.literal('media'),
-  content: z.string().url({ message: 'Devi inserire un URL valido' }),
-});
-
-export const geoBody = z.object({
-  type: z.literal('geo'),
-  content: featureCollectionSchema,
-});
 
 export const squealWriteSchema = z.object({
   receivers: receiversArray,
@@ -42,6 +28,7 @@ export const squealReadSchema = z.object({
   impressions: positiveInteger,
   positive_reaction: positiveInteger,
   negative_reaction: positiveInteger,
+  comments: z.array(commentReadSchema),
 });
 
 export type squealRead_t = z.infer<typeof squealReadSchema>;
