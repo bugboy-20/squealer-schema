@@ -27,6 +27,7 @@ export const squealReadSchema = z.object({
   impressions: positiveInteger,
   positive_reaction: positiveInteger,
   negative_reaction: positiveInteger,
+  reacted: z.boolean().default(false),
   category: z.array(z.string()),
   comments: z.array(commentReadSchema),
 });
