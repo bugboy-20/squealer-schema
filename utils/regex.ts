@@ -14,3 +14,5 @@ export const channelRegex = new RegExp(
     '|' +
     /^#.+$/.source,
 );
+
+export const urlRegex = /(https?:\/\/[^\s]+)/g;
