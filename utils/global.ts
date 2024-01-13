@@ -1,7 +1,10 @@
 import { z } from 'zod';
-
-const passwRegex =
-  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-.]).{8,}$/;
+import {
+  channelRegex,
+  officialChannelRegex,
+  passwRegex,
+  usernameRegex,
+} from './regex';
 
 export const passwString = z
   .string()
@@ -13,14 +16,14 @@ export const passwString = z
   });
 
 export const userString = z.custom<`@${string}`>(
-  (val) => /@(.+)/.test(val as string),
+  (val) => usernameRegex.test(val as string),
   {
     message: "Un utente deve iniziare con '@'",
   },
 );
 
 export const channelString = z.custom<`§${string}` | `#${string}`>(
-  (val) => /^§([a-z]+|[A-Z]+)|#.+$/.test(val as string),
+  (val) => channelRegex.test(val as string),
   {
     message:
       "Il canale deve iniziare con '#' o '§' e deve esssere tutto minuscolo o tutto maiuscolo",
@@ -28,7 +31,7 @@ export const channelString = z.custom<`§${string}` | `#${string}`>(
 );
 
 export const officialChannelString = z.custom<`§${string}`>((val) =>
-  /^§[A-Z]+.+$/.test(val as string),
+  officialChannelRegex.test(val as string),
 );
 
 export const receiverString = z.union([userString, channelString], {
