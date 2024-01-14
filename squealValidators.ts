@@ -33,3 +33,17 @@ export const squealReadSchema = z.object({
 });
 
 export type squealRead_t = z.infer<typeof squealReadSchema>;
+
+export type looseSquealRead_t = {
+  id: squealRead_t['id'];
+  author: string;
+  receivers: string[];
+  body: squealRead_t['body'];
+  datetime: squealRead_t['datetime'];
+  impressions: squealRead_t['impressions'];
+  positive_reaction: squealRead_t['positive_reaction'];
+  negative_reaction: squealRead_t['negative_reaction'];
+  reacted: squealRead_t['reacted'];
+  category: squealRead_t['category'];
+  comments: squealRead_t['comments'];
+};
