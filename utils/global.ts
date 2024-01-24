@@ -42,6 +42,15 @@ export const receiverString = z.union([userString, channelString], {
   },
 });
 
+export const receiversArray = z
+  .array(receiverString)
+  .nonempty({
+    message: 'Devi specificare almeno un destinatario',
+  })
+  .refine((items) => new Set(items).size === items.length, {
+    message: 'Non puoi inserire destinatari duplicati',
+  });
+
 export const standardString = z
   .string()
   .min(3, { message: 'Devi inserire almeno 3 caratteri' })

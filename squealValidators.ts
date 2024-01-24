@@ -1,16 +1,7 @@
 import { z } from 'zod';
 import { commentReadSchema } from './commentValidators';
-import { positiveInteger, receiverString, userString } from './utils/global';
+import { positiveInteger, receiversArray, userString } from './utils/global';
 import { geoBody, mediaBody, textBody } from './utils/squealBody';
-
-const receiversArray = z
-  .array(receiverString)
-  .nonempty({
-    message: 'Devi specificare almeno un destinatario',
-  })
-  .refine((items) => new Set(items).size === items.length, {
-    message: 'Non puoi inserire destinatari duplicati',
-  });
 
 export const squealWriteSchema = z.object({
   receivers: receiversArray,
