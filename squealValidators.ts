@@ -6,6 +6,7 @@ import { geoBody, mediaBody, textBody } from './utils/squealBody';
 export const squealWriteSchema = z.object({
   receivers: receiversArray,
   body: z.discriminatedUnion('type', [textBody, mediaBody, geoBody]),
+  author: userString.optional(),
 });
 
 export type squealWrite_t = z.infer<typeof squealWriteSchema>;
