@@ -48,7 +48,7 @@ export const receiversArray = z
 
 export const standardString = z
   .string()
-  .min(3, { message: 'Devi inserire almeno 3 caratteri' })
+  .min(1, { message: 'Devi inserire almeno 1 caratteri' })
   .max(20, { message: 'Devi inserire al massimo 20 caratteri' });
 
 export const emailString = z
