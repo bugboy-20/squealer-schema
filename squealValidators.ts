@@ -20,6 +20,7 @@ export const squealReadSchema = z.object({
   positive_reaction: positiveInteger,
   negative_reaction: positiveInteger,
   reacted: z.boolean().default(false),
+  isViewed: z.boolean().default(false),
   category: z.array(z.string()),
   comments: z.array(commentReadSchema),
 });
@@ -36,6 +37,7 @@ export type looseSquealRead_t = {
   positive_reaction: squealRead_t['positive_reaction'];
   negative_reaction: squealRead_t['negative_reaction'];
   reacted: squealRead_t['reacted'];
+  isViewed: squealRead_t['isViewed'];
   category: squealRead_t['category'];
   comments: squealRead_t['comments'];
 };
