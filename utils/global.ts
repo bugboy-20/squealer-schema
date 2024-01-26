@@ -1,19 +1,14 @@
 import { z } from 'zod';
-import {
-  channelRegex,
-  officialChannelRegex,
-  passwRegex,
-  usernameRegex,
-} from './regex';
+import { channelRegex, officialChannelRegex, usernameRegex } from './regex';
 
 export const passwString = z
   .string()
   .min(8, { message: 'La password deve avere minimo 8 caratteri.' })
-  .max(40, { message: 'La password deve essere al massimo 40 caratteri' })
-  .regex(passwRegex, {
-    message:
-      'La password deve avere minimo 8 caratteri. Di cui uno maiuscolo, uno speciale e un numero',
-  });
+  .max(40, { message: 'La password deve essere al massimo 40 caratteri' });
+// .regex(passwRegex, {
+//   message:
+//     'La password deve avere minimo 8 caratteri. Di cui uno maiuscolo, uno speciale e un numero',
+// });
 
 export const userString = z.custom<`@${string}`>(
   (val) => usernameRegex.test(val as string),
